@@ -1,16 +1,9 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-const implementosSchema = new mongoose.Schema({
-  nombre: String,
-  descripcion: String,
-  cantidad: Number,
-  estado: {
-    type: String,
-    enum: ['disponible', 'no disponible'],
-    default: 'disponible'
-  }
+const NotificacionSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  recursoId: { type: mongoose.Schema.Types.ObjectId, refPath: 'recursoTipo' },
+  recursoTipo: { type: String, enum: ['Implemento', 'Instalacion'], required: true }
 });
 
-const Implementos = mongoose.model('Implementos', implementosSchema);
-
-export default Implementos;
+module.exports = mongoose.model('Notificacion', NotificacionSchema);

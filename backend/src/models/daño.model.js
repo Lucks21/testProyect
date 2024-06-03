@@ -1,26 +1,28 @@
 "use strict";
 import mongoose from "mongoose";
+const { Schema } = mongoose;
 
-const dañoSchema = new mongoose.Schema(
-    {
-        implementoId:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Implemento',
-            required: true
-        },
-        descripcion:{
-            type: String,
-            required: true
-        },
-        fechaRegistro:{
-            type: String,
-            required: true
-        },
-        responsable:{
-            type: mongoose.Schema.Types.ObjectId, //se referencia al alumno que hizo el daño
-        }
-    }
-)
+const dañoSchema = new Schema({
+  implementoId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Implemento',
+    required: true
+  },
+  descripcion: {
+    type: String,
+    required: true
+  },
+  fechaRegistro: {
+    type: Date,
+    default: Date.now,
+    required: true
+  },
+  responsable: {
+    type: Schema.Types.ObjectId,
+    ref: 'Alumno',
+    required: true
+  }
+});
 
-const Daño = mongoose.model("Daño",dañoSchema);
+const Daño = mongoose.model("Daño", dañoSchema);
 export default Daño;

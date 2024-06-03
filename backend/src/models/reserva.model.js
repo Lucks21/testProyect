@@ -1,34 +1,34 @@
 "use strict";
 import mongoose from "mongoose";
+const { Schema } = mongoose;
 
-const reservaSchema = new mongoose.Schema(
-    {
-        userId:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true // indica que el campo es obligatorio
-        },
-        implementoId:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Implementos'
-        },
-        instalacionId:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Instalacion'
-        },
-        fechaInicio:{
-            type: Date,
-            required: true
-        },
-        fechaFin:{
-            type: Date
-        },
-        estado:{
-            type: String,
-            enum: ['disponible','no disponible'],
-            default: 'disponible'
-        }
-    }
-)
-const Reserva = mongoose.model("Reserva",reservaSchema);
+const reservaSchema = new Schema({
+  alumnoId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Alumno',
+    required: true
+  },
+  implementoId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Implemento'
+  },
+  instalacionId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Instalacion'
+  },
+  fechaInicio: {
+    type: Date,
+    required: true
+  },
+  fechaFin: {
+    type: Date
+  },
+  estado: {
+    type: String,
+    enum: ['activo', 'cancelado', 'completado'],
+    default: 'activo'
+  }
+});
+
+const Reserva = mongoose.model("Reserva", reservaSchema);
 export default Reserva;

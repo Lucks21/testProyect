@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
-const implementosSchema = new mongoose.Schema({
-  nombre: String,
-  descripcion: String,
-  cantidad: Number,
+const implementoSchema = new Schema({
+  nombre: { type: String, required: true },
+  descripcion: { type: String, required: true },
+  cantidad: { type: Number, required: true, default: 0 },
   estado: {
     type: String,
     enum: ['disponible', 'no disponible'],
@@ -11,6 +12,5 @@ const implementosSchema = new mongoose.Schema({
   }
 });
 
-const Implementos = mongoose.model('Implementos', implementosSchema);
-
-export default Implementos;
+const Implemento = mongoose.model('Implemento', implementoSchema);
+export default Implemento;
